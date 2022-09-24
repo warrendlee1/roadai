@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 25px;
 }
 
 .report-body {
@@ -9,7 +10,6 @@
   justify-content: start;
   flex: 1;
   flex-direction: column;
-  margin: 25px;
 }
 
 .report-label {
@@ -28,6 +28,7 @@
 }
 .report-label:active {
   box-shadow: none;
+  background-color: #36E55C;
 }
 
 .report-footer {
@@ -35,7 +36,6 @@
   /* flex: 1; */
   justify-content: space-between;
   align-items: center;
-  margin: 25px;
 }
 
 .report-primary-button {
@@ -67,7 +67,6 @@
   font-family: "Inter Black";
   text-decoration: none;
   font-size: 1.5rem;
-  color: #3e3aff;
-
+  color: gray;
   margin-right: 25px;
 }

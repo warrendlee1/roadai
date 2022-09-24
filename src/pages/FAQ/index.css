@@ -1,0 +1,35 @@
+.faq-root {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+.faq-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.faq-body {
+  font-family: "Inter Medium";
+  font-size: 1.2rem;
+}
+
+.faq-button {
+  background-color: #3e3aff;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  /* text */
+  font-family: "Inter Black";
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.faq-button:active {
+  box-shadow: none;
+}

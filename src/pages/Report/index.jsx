@@ -1,5 +1,5 @@
 // Libraries
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // Files
@@ -8,6 +8,7 @@ import "./index.css";
 
 const Report = (props) => {
   const { content } = props;
+  const [selectedLabels, setSelectedLabels] = useState([]);
   return (
     <div className="report-root">
       <Header title={content["header-title"]} />

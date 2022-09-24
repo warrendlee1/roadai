@@ -5,14 +5,23 @@ import { Link } from "react-router-dom";
 // Components
 import Header from "../../components/Header";
 
+// Files
+import "./index.css";
+
 const FAQ = (props) => {
   const { content } = props;
 
   return (
-    <div>
+    <div className="faq-root">
       <Header title={content["header-title"]} />
-      <p>{content["body-content"]}</p>
-      <Link to="/">Done</Link>
+      <div className="faq-content">
+        <div className="faq-body">
+          <p>{content["body-content"]}</p>
+        </div>
+        <Link className="faq-button" to="/">
+          Done
+        </Link>
+      </div>
     </div>
   );
 };
