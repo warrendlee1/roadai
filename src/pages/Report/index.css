@@ -29,6 +29,8 @@
   background-color: white;
   margin-bottom: 1rem;
   transition: 0.1s;
+  display: flex;
+  justify-content: space-between;
 }
 .report-label-active {
   box-shadow: none;
@@ -36,6 +38,22 @@
   font-family: "Inter Black";
   color: white;
   font-size: 1.5rem;
+}
+
+.report-icon-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.report-icon {
+  fill: #dadada;
+}
+
+.report-icon-active {
+  fill: #ffffff;
 }
 
 .report-footer {

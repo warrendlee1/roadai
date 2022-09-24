@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 // Files
 import Header from "../../components/Header";
 import "./index.css";
+import MicIcon from "../../assets/Icons/MicIcon";
 
 const Report = (props) => {
   const { content } = props;
@@ -45,7 +46,18 @@ const Report = (props) => {
             onClick={() => handleSelect(label)}
             key={label}
           >
-            {label}
+            <p style={{ margin: "0px" }}>{label}</p>
+            {label.toLowerCase() === "other" ? (
+              <div className="report-icon-container">
+                <MicIcon
+                  className={
+                    selectedLabels.includes(label)
+                      ? "report-icon report-icon-active"
+                      : "report-icon"
+                  }
+                />
+              </div>
+            ) : null}
           </button>
         ))}
       </div>
