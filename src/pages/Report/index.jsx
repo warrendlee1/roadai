@@ -9,12 +9,33 @@ import "./index.css";
 const Report = (props) => {
   const { content } = props;
   const [selectedLabels, setSelectedLabels] = useState([]);
+
+  const handleSelect = (item) => {
+    if (selectedLabels.includes(item)) {
+      setSelectedLabels(
+        selectedLabels.filter(function (e) {
+          return e !== item;
+        })
+      );
+    } else {
+      setSelectedLabels([...selectedLabels, item]);
+    }
+  };
+
   return (
     <div className="report-root">
       <Header title={content["header-title"]} />
       <div className="report-body">
         {content["label-options"].map((label) => (
-          <button className="report-label" key={label}>
+          <button
+            className={
+              selectedLabels.includes(label)
+                ? "report-label report-label-active"
+                : "report-label"
+            }
+            onClick={() => handleSelect(label)}
+            key={label}
+          >
             {label}
           </button>
         ))}

@@ -12,8 +12,12 @@
   flex-direction: column;
 }
 
+.report-label-container {
+  border: none;
+  flex: 1;
+}
+
 .report-label {
-  width: 100%;
   padding: 22px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   border: none;
@@ -24,11 +28,14 @@
   color: #565656;
   background-color: white;
   margin-bottom: 20px;
-  transition: 0.2s;
+  transition: 0.1s;
 }
-.report-label:active {
+.report-label-active {
   box-shadow: none;
-  background-color: #36E55C;
+  background-color: #36e55c;
+  font-family: "Inter Black";
+  color: white;
+  font-size: 1.25rem;
 }
 
 .report-footer {
