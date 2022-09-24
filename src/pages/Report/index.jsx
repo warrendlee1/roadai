@@ -9,6 +9,7 @@ import "./index.css";
 const Report = (props) => {
   const { content } = props;
   const [selectedLabels, setSelectedLabels] = useState([]);
+  const [isValidSubmission, setIsValidSubmission] = useState(false);
 
   const handleSelect = (item) => {
     if (selectedLabels.includes(item)) {
@@ -17,8 +18,10 @@ const Report = (props) => {
           return e !== item;
         })
       );
+      setIsValidSubmission(false);
     } else {
       setSelectedLabels([...selectedLabels, item]);
+      setIsValidSubmission(true);
     }
   };
 
@@ -44,7 +47,10 @@ const Report = (props) => {
         <Link className="report-secondary-button" to="/">
           {content["cancel-button"]}
         </Link>
-        <Link className="report-primary-button" to="/confirmation">
+        <Link
+          className="report-primary-button"
+          to={isValidSubmission ? "/confirmation" : "#"}
+        >
           {content["submit-button"]}
         </Link>
       </div>

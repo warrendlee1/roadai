@@ -21,10 +21,10 @@
   padding: 22px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   border: none;
-  border-radius: 1.2rem;
+  border-radius: 1rem;
   text-align: start;
   font-family: "Inter Medium";
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #565656;
   background-color: white;
   margin-bottom: 20px;
@@ -32,10 +32,10 @@
 }
 .report-label-active {
   box-shadow: none;
-  background-color: #36e55c;
+  background-color: #26dc4e;
   font-family: "Inter Black";
   color: white;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .report-footer {
@@ -71,9 +71,9 @@
   border-radius: 1rem;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
   /* text */
-  font-family: "Inter Black";
+  font-family: "Inter Medium";
   text-decoration: none;
   font-size: 1.5rem;
-  color: gray;
+  color: #565656;
   margin-right: 25px;
 }

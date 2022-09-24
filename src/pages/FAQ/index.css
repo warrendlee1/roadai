@@ -16,18 +16,35 @@
 }
 
 .faq-button {
-  background-color: #3e3aff;
   padding: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 1rem;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 23px rgba(0, 0, 0, 0.36);
   /* text */
   font-family: "Inter Black";
   text-decoration: none;
   font-size: 1.5rem;
+  /*  */
+  background-color: #3e3aff;
   color: white;
+
+  /* 
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.5rem;
+  box-shadow: 0px 4px 23px rgba(0, 0, 0, 0.36);
+  font-family: "Inter Black";
+  text-decoration: none;
+  font-size: 1.5rem;
+
+  transition: 0.2s;
+  width: 100%;
+  align-self: flex-end;
+  */
 }
 
 .faq-button:active {
