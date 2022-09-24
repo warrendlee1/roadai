@@ -3,20 +3,29 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Files
-import InfoIcon from "../../assets/InfoIcon";
+import Header from "../../components/Header";
+import "./index.css";
 
 const Report = (props) => {
   const { content } = props;
   return (
-    <div>
-      <p>{content["header-title"]}</p>
-      <div>
+    <div className="report-root">
+      <Header title={content["header-title"]} />
+      <div className="report-body">
         {content["label-options"].map((label) => (
-          <button key={label}>{label}</button>
+          <button className="report-label" key={label}>
+            {label}
+          </button>
         ))}
       </div>
-      <Link to="/">{content["cancel-button"]}</Link>
-      <Link to="/confirmation">{content["submit-button"]}</Link>
+      <div className="report-footer">
+        <Link className="report-secondary-button" to="/">
+          {content["cancel-button"]}
+        </Link>
+        <Link className="report-primary-button" to="/confirmation">
+          {content["submit-button"]}
+        </Link>
+      </div>
     </div>
   );
 };

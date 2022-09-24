@@ -1,0 +1,72 @@
+.report-root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.report-body {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  flex-direction: column;
+  margin: 25px;
+}
+
+.report-label {
+  width: 100%;
+  padding: 22px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 1.5rem;
+  text-align: start;
+  font-family: "Inter Medium";
+  font-size: 1.2rem;
+  color: #565656;
+  background-color: white;
+  transition: 0.2s;
+}
+.report-label:active {
+  box-shadow: none;
+}
+
+.report-footer {
+  display: flex;
+  /* flex: 1; */
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px;
+}
+
+.report-primary-button {
+  background-color: #3e3aff;
+  padding: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  /* text */
+  font-family: "Inter Black";
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.report-secondary-button {
+  background-color: white;
+  padding: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+  /* text */
+  font-family: "Inter Black";
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #3e3aff;
+
+  margin-right: 25px;
+}

@@ -1,6 +1,11 @@
 .header-root {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: blue;
+  padding: 25px;
+}
+
+.header-title {
+  font-family: "Inter Black";
+  font-size: 2rem;
 }
