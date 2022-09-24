@@ -16,7 +16,14 @@ const FAQ = (props) => {
       <Header title={content["header-title"]} />
       <div className="faq-content">
         <div className="faq-body">
-          <p>{content["body-content"]}</p>
+          {content["body-content"].map((value, index) => {
+            return (
+              <div key={index}>
+                <p className="faq-question">{value.question}</p>
+                <p>{value.answer}</p>
+              </div>
+            );
+          })}
         </div>
         <Link className="faq-button" to="/">
           Done

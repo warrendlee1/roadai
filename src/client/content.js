@@ -6,7 +6,9 @@ const content = {
   },
   FAQ: {
     "header-title": "FAQ",
-    "body-content": "Add some FAQ questions and answers here for content",
+    "body-content": [
+      { question: "Is this a question?", answer: "This is an example answer." },
+    ],
   },
   Report: {
     "header-title": "Select Label",

@@ -16,19 +16,21 @@ import "./App.css";
 const App = () => {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Home content={content.Home} />} />
-        <Route path="/faq" element={<FAQ content={content.FAQ} />} />
-        <Route path="/report" element={<Report content={content.Report} />} />
-        <Route
-          path="/loading"
-          element={<Loading content={content.Loading} />}
-        />
-        <Route
-          path="/confirmation"
-          element={<Confirmation content={content.Confirmation} />}
-        />
-      </Routes>
+      <div className="App-content">
+        <Routes>
+          <Route path="/" element={<Home content={content.Home} />} />
+          <Route path="/faq" element={<FAQ content={content.FAQ} />} />
+          <Route path="/report" element={<Report content={content.Report} />} />
+          <Route
+            path="/loading"
+            element={<Loading content={content.Loading} />}
+          />
+          <Route
+            path="/confirmation"
+            element={<Confirmation content={content.Confirmation} />}
+          />
+        </Routes>
+      </div>
     </div>
   );
 };

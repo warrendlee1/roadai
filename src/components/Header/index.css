@@ -2,10 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 25px; */
 }
 
 .header-title {
   font-family: "Inter Black";
   font-size: 2rem;
+  margin: 0px;
 }

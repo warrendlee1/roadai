@@ -25,6 +25,12 @@ const Report = (props) => {
     }
   };
 
+  const checkValidSubmission = () => {
+    if (isValidSubmission === false) {
+      alert("Incomplete Form");
+    }
+  };
+
   return (
     <div className="report-root">
       <Header title={content["header-title"]} />
@@ -47,12 +53,17 @@ const Report = (props) => {
         <Link className="report-secondary-button" to="/">
           {content["cancel-button"]}
         </Link>
-        <Link
+        <button
           className="report-primary-button"
-          to={isValidSubmission ? "/confirmation" : "#"}
+          onClick={checkValidSubmission}
         >
-          {content["submit-button"]}
-        </Link>
+          <Link
+            style={{ textDecoration: "none", border: "none", color: "white" }}
+            to={isValidSubmission ? "/confirmation" : "#"}
+          >
+            {content["submit-button"]}
+          </Link>
+        </button>
       </div>
     </div>
   );
