@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useGeoData() {
+export function useGeoData() {
   const [geoData, setGeoData] = useState({});
   const [error, setError] = useState(null);
 
