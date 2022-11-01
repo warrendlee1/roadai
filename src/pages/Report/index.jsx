@@ -7,6 +7,9 @@ import Header from "../../components/Header";
 import "./index.css";
 import MicIcon from "../../assets/Icons/MicIcon";
 
+// Functions
+import { POST } from "../../client/http-functions";
+
 const Report = (props) => {
   const { content } = props;
   const [selectedLabels, setSelectedLabels] = useState([]);
@@ -26,8 +29,33 @@ const Report = (props) => {
     }
   };
 
-  const checkValidSubmission = () => {
-    if (isValidSubmission === false) {
+  const submit = async () => {
+    if (isValidSubmission) {
+      // location data
+      navigator.geolocation.getCurrentPosition(
+        // success
+        (pos) => {
+          const crd = pos.coords;
+          console.log(crd);
+          POST({
+            obstructions: selectedLabels,
+            location: {
+              latitude: crd.latitude,
+              longitude: crd.longitude,
+              accuracy: crd.accuracy,
+            },
+          });
+        },
+        // error
+        () => console.error("GEOLOCATION not supported"),
+        // options
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    } else {
       alert("Incomplete Form");
     }
   };
@@ -65,17 +93,14 @@ const Report = (props) => {
         <Link className="report-secondary-button" to="/">
           {content["cancel-button"]}
         </Link>
-        <button
+        <Link
           className="report-primary-button"
-          onClick={checkValidSubmission}
+          style={{ textDecoration: "none", border: "none", color: "white" }}
+          to="/confirmation"
+          onClick={submit}
         >
-          <Link
-            style={{ textDecoration: "none", border: "none", color: "white" }}
-            to={isValidSubmission ? "/confirmation" : "#"}
-          >
-            {content["submit-button"]}
-          </Link>
-        </button>
+          {content["submit-button"]}
+        </Link>
       </div>
     </div>
   );
