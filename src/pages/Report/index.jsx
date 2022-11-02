@@ -1,9 +1,10 @@
 // Libraries
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Files
 import Header from "../../components/Header";
+import Loading from "../Loading";
 import "./index.css";
 import MicIcon from "../../assets/Icons/MicIcon";
 
@@ -14,6 +15,8 @@ const Report = (props) => {
   const { content } = props;
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isValidSubmission, setIsValidSubmission] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSelect = (item) => {
     if (selectedLabels.includes(item)) {
@@ -29,38 +32,47 @@ const Report = (props) => {
     }
   };
 
-  const submit = async () => {
-    if (isValidSubmission) {
-      // location data
+  const postLocation = async () => {
+    setShowLoading(true);
+    return new Promise(() => {
       navigator.geolocation.getCurrentPosition(
         // success
-        (pos) => {
-          const crd = pos.coords;
-          console.log(crd);
-          POST({
+        async (pos) => {
+          const coordinates = pos.coords;
+          await POST({
             obstructions: selectedLabels,
             location: {
-              latitude: crd.latitude,
-              longitude: crd.longitude,
-              accuracy: crd.accuracy,
+              latitude: coordinates.latitude,
+              longitude: coordinates.longitude,
+              accuracy: coordinates.accuracy,
             },
           });
+          setShowLoading(false);
+          navigate("/confirmation");
         },
         // error
         () => console.error("GEOLOCATION not supported"),
         // options
         {
           enableHighAccuracy: true,
-          timeout: 10000,
+          timeout: 60000,
           maximumAge: 0,
         }
       );
+    });
+  };
+
+  const submit = () => {
+    if (isValidSubmission) {
+      postLocation();
     } else {
       alert("Incomplete Form");
     }
   };
 
-  return (
+  return showLoading ? (
+    <Loading />
+  ) : (
     <div className="report-root">
       <Header title={content["header-title"]} />
       <div className="report-body">
@@ -96,7 +108,7 @@ const Report = (props) => {
         <Link
           className="report-primary-button"
           style={{ textDecoration: "none", border: "none", color: "white" }}
-          to="/confirmation"
+          // to="/confirmation"
           onClick={submit}
         >
           {content["submit-button"]}
