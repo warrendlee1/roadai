@@ -1,60 +1,33 @@
 // Libraries
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
 // Pages
-import FAQ from './pages/FAQ';
-import Home from './pages/Home';
-import Report from './pages/Report';
-import Loading from './pages/Loading';
-import Confirmation from './pages/Confirmation';
-import Login from './components/Auth/Login';
-import Register from './components/Auth/Register';
-import ProtectedRoute from './components/Auth/ProtectedRoute';
+import FAQ from "./pages/FAQ";
+import Home from "./pages/Home";
+import Report from "./pages/Report";
+import Loading from "./pages/Loading";
+import Confirmation from "./pages/Confirmation";
 
 // Files
-import content from './client/content';
-import './App.css';
+import content from "./client/content";
+import "./App.css";
 
 const App = () => {
   return (
     <div className="App">
       <div className="App-content">
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Home content={content.Home} />} />
+          <Route path="/faq" element={<FAQ content={content.FAQ} />} />
+          <Route path="/report" element={<Report content={content.Report} />} />
           <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home content={content.Home} />
-              </ProtectedRoute>
-            }
+            path="/loading"
+            element={<Loading content={content.Loading} />}
           />
-          <Route
-            path="/faq"
-            element={
-              <ProtectedRoute>
-                <FAQ content={content.FAQ} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/report"
-            element={
-              <ProtectedRoute>
-                <Report content={content.Report} />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/loading" element={<Loading content={content.Loading} />} />
           <Route
             path="/confirmation"
-            element={
-              <ProtectedRoute>
-                <Confirmation content={content.Confirmation} />
-              </ProtectedRoute>
-            }
+            element={<Confirmation content={content.Confirmation} />}
           />
         </Routes>
       </div>

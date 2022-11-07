@@ -1,16 +1,22 @@
 // Libraries
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Files
 import Header from "../../components/Header";
+import Loading from "../Loading";
 import "./index.css";
 import MicIcon from "../../assets/Icons/MicIcon";
+
+// Functions
+import { POST } from "../../client/http-functions";
 
 const Report = (props) => {
   const { content } = props;
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isValidSubmission, setIsValidSubmission] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSelect = (item) => {
     if (selectedLabels.includes(item)) {
@@ -26,13 +32,47 @@ const Report = (props) => {
     }
   };
 
-  const checkValidSubmission = () => {
-    if (isValidSubmission === false) {
+  const postLocation = async () => {
+    setShowLoading(true);
+    return new Promise(() => {
+      navigator.geolocation.getCurrentPosition(
+        // success
+        async (pos) => {
+          const coordinates = pos.coords;
+          await POST({
+            obstructions: selectedLabels,
+            location: {
+              latitude: coordinates.latitude,
+              longitude: coordinates.longitude,
+              accuracy: coordinates.accuracy,
+            },
+          });
+          setShowLoading(false);
+          navigate("/confirmation");
+        },
+        // error
+        () => console.error("GEOLOCATION not supported"),
+        // options
+        {
+          enableHighAccuracy: true,
+          timeout: 60000,
+          maximumAge: 0,
+        }
+      );
+    });
+  };
+
+  const submit = () => {
+    if (isValidSubmission) {
+      postLocation();
+    } else {
       alert("Incomplete Form");
     }
   };
 
-  return (
+  return showLoading ? (
+    <Loading />
+  ) : (
     <div className="report-root">
       <Header title={content["header-title"]} />
       <div className="report-body">
@@ -65,17 +105,14 @@ const Report = (props) => {
         <Link className="report-secondary-button" to="/">
           {content["cancel-button"]}
         </Link>
-        <button
+        <Link
           className="report-primary-button"
-          onClick={checkValidSubmission}
+          style={{ textDecoration: "none", border: "none", color: "white" }}
+          // to="/confirmation"
+          onClick={submit}
         >
-          <Link
-            style={{ textDecoration: "none", border: "none", color: "white" }}
-            to={isValidSubmission ? "/confirmation" : "#"}
-          >
-            {content["submit-button"]}
-          </Link>
-        </button>
+          {content["submit-button"]}
+        </Link>
       </div>
     </div>
   );
