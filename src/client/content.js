@@ -17,7 +17,6 @@ const content = {
       "Traffic Sign",
       "Narrow Road",
       "Obstructed Lane",
-      "Other",
     ],
     "submit-button": "Submit",
     "cancel-button": "Cancel",
