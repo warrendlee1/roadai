@@ -1,7 +1,6 @@
 // Libraries
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import MicRecorder from "mic-recorder-to-mp3";
 import { ReactMic } from "react-mic";
 
 // Files
@@ -17,59 +16,13 @@ const Report = (props) => {
   // Variables
   const { content } = props;
   const navigate = useNavigate();
-  // const Mp3Recorder = new MicRecorder({ bitRate: 128 });
 
   // State
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [isValidSubmission, setIsValidSubmission] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const [audioIsRecording, setAudioIsRecording] = useState(false);
-  // const [audioBlobURL, setAudioBlobURL] = useState("");
-  // const [audioBlocked, setAudioBlocked] = useState(false);
-
-  // const startAudioRecording = () => {
-  //   if (audioBlocked) {
-  //     console.log("Permission Denied");
-  //   } else {
-  //     Mp3Recorder.start()
-  //       .then(() => {
-  //         setAudioIsRecording(true);
-  //       })
-  //       .catch((e) => console.error(e));
-  //   }
-  // };
-
-  // const stopAudioRecording = () => {
-  //   Mp3Recorder.stop()
-  //     .getMp3()
-  //     .then(([buffer, blob]) => {
-  //       const blobURL = URL.createObjectURL(blob);
-  //       setAudioBlobURL(blobURL);
-  //       setAudioIsRecording(false);
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
-
-  // const handleRecording = () => {
-  //   handleSelect("other");
-  //   if (audioIsRecording) {
-  //     console.log("hi");
-  //     stopAudioRecording();
-  //   } else {
-  //     navigator.getUserMedia(
-  //       { audio: true },
-  //       () => {
-  //         console.log("Permission Granted");
-  //         setAudioBlocked(false);
-  //       },
-  //       () => {
-  //         console.log("Permission Denied");
-  //         setAudioBlocked(true);
-  //       }
-  //     );
-  //     startAudioRecording();
-  //   }
-  // };
+  const [audioBlobURL, setAudioBlobURL] = useState("");
 
   const startRecording = () => {
     setAudioIsRecording(true);
@@ -79,32 +32,24 @@ const Report = (props) => {
     setAudioIsRecording(false);
   };
 
-  const handleRecording = () => {
-    handleSelect("other");
-    if (audioIsRecording) {
-      stopRecording();
-    } else {
-      startRecording();
-    }
-  };
-
-  const onData = (recordedBlob) => {
-    console.log("chunk of real-time data is: ", recordedBlob);
-  };
-
   const onStop = (recordedBlob) => {
-    console.log("recordedBlob is: ", recordedBlob);
+    console.log("recordedBlob: ", recordedBlob);
+    setAudioBlobURL(recordedBlob);
   };
 
   const handleSelect = (item) => {
-    if (selectedLabels.includes(item)) {
+    if (audioIsRecording) {
+      stopRecording();
+    } else if (selectedLabels.includes(item)) {
       setSelectedLabels(
         selectedLabels.filter(function (e) {
           return e !== item;
         })
       );
-      setIsValidSubmission(false);
     } else {
+      if (item === "other") {
+        startRecording();
+      }
       setSelectedLabels([...selectedLabels, item]);
       setIsValidSubmission(true);
     }
@@ -117,8 +62,12 @@ const Report = (props) => {
         // success
         async (pos) => {
           const coordinates = pos.coords;
+          const audioBlob = selectedLabels.includes("other")
+            ? audioBlobURL
+            : null;
           await POST({
             obstructions: selectedLabels,
+            data: { other_audio: audioBlob },
             location: {
               latitude: coordinates.latitude,
               longitude: coordinates.longitude,
@@ -180,23 +129,35 @@ const Report = (props) => {
         ))}
         <button
           className={
-            selectedLabels.includes("other")
+            audioIsRecording
               ? "report-label-other report-label"
+              : selectedLabels.includes("other")
+              ? "report-label-active report-label"
               : "report-label"
           }
-          onClick={handleRecording}
-          // disabled={audioIsRecording}
+          onClick={() => handleSelect("other")}
           key="Other"
         >
           <p style={{ margin: "0px" }}>Other</p>
+          <ReactMic
+            record={audioIsRecording}
+            className={
+              audioIsRecording ? "report-react-mic-active" : "report-react-mic"
+            }
+            onStop={onStop}
+            strokeColor="#3e3aff"
+            backgroundColor="white"
+            visualSetting="frequencyBars"
+          />
           <div className="report-icon-container">
-            <MicIcon className="report-icon" />
-            <ReactMic
-              record={audioIsRecording}
-              className={audioIsRecording ? null : "report-react-mic"}
-              onStop={onStop}
-              onData={onData}
-              strokeColor="#000000"
+            <MicIcon
+              className={
+                audioIsRecording
+                  ? "report-icon-pressed"
+                  : selectedLabels.includes("other")
+                  ? "report-icon-active"
+                  : "report-icon"
+              }
             />
           </div>
         </button>

@@ -59,6 +59,10 @@
   fill: #dadada;
 }
 
+.report-icon-pressed {
+  fill: #3e3aff;
+}
+
 .report-icon-active {
   fill: #ffffff;
 }
@@ -115,4 +119,11 @@
 
 .report-react-mic-active {
   display: block;
+  justify-content: center;
+  align-items: center;
+  /* position: absolute; */
+  /* z-index: 2; */
+  width: 50%;
+  height: 100%;
+  margin-left: 1.5em;
 }
