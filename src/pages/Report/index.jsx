@@ -80,6 +80,7 @@ const Report = (props) => {
   };
 
   const handleRecording = () => {
+    handleSelect("other");
     if (audioIsRecording) {
       stopRecording();
     } else {
