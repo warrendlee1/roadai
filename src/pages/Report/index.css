@@ -112,3 +112,7 @@
 .report-react-mic {
   display: none;
 }
+
+.report-react-mic-active {
+  display: block;
+}

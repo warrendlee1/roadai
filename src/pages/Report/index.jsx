@@ -193,11 +193,10 @@ const Report = (props) => {
             <MicIcon className="report-icon" />
             <ReactMic
               record={audioIsRecording}
-              className="report-react-mic"
+              className={audioIsRecording ? null : "report-react-mic"}
               onStop={onStop}
               onData={onData}
               strokeColor="#000000"
-              backgroundColor="#FF4081"
             />
           </div>
         </button>
