@@ -7,6 +7,6 @@ export const POST = (body) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   }).then((res) => {
-    console.log("Request complete! response:", res);
+    console.log("Request complete. Response:", res);
   });
 };
