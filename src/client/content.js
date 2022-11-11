@@ -7,7 +7,15 @@ const content = {
   FAQ: {
     "header-title": "FAQ",
     "body-content": [
-      { question: "Is this a question?", answer: "This is an example answer." },
+      {
+        question: "What is RoadAI?",
+        answer: "RoadAI is an API for locations of hard-to-navigate roads.",
+      },
+      {
+        question: "How does Driver Tools work?",
+        answer:
+          "Whenever you see a road obstruction or driving conditions that are hard to navigate, press 'Create Report'. Choose from the road obstruction choices, or record a description of the obstruction using the 'Other' selection. When you're done, click 'Submit' and our team will review your submission.",
+      },
     ],
   },
   Report: {
