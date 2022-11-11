@@ -11,6 +11,19 @@
   max-width: 800px;
 }
 
+div {
+  animation: fadeInAnimation ease 150ms;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @font-face {
   font-family: "Inter Black";
   src: url("./assets/Fonts/Inter/static/Inter-Black.ttf");
