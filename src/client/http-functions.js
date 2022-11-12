@@ -4,7 +4,7 @@ export const POST = (body) => {
   // POST request using fetch inside useEffect React hook
   fetch(`${rootURL}/add`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { Accept: "application/json" },
     body: JSON.stringify(body),
   }).then((res) => {
     console.log("Request complete. Response:", res);

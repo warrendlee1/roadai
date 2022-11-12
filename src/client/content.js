@@ -9,7 +9,7 @@ const content = {
     "body-content": [
       {
         question: "What is RoadAI?",
-        answer: "RoadAI is an API for locations of hard-to-navigate roads.",
+        answer: "RoadAI is an API for labeled data on hard-to-navigate roads.",
       },
       {
         question: "How does Driver Tools work?",
