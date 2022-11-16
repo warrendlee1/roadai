@@ -6,8 +6,8 @@ import { ReactMic } from "react-mic";
 // Files
 import Header from "../../components/Header";
 import Loading from "../../components/Loading";
-import "./index.css";
 import MicIcon from "../../assets/Icons/MicIcon";
+import "./index.css";
 
 // Functions
 import { POST } from "../../client/http-functions";
@@ -36,7 +36,7 @@ const Report = (props) => {
     var reader = new FileReader();
     reader.readAsDataURL(blob["blob"]);
     reader.onloadend = function () {
-      var base64data = reader.result;
+      const base64data = reader.result;
       setAudioData(base64data);
     };
   };
