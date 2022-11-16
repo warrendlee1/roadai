@@ -1,13 +1,13 @@
 // Libraries
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import { ReactMic } from "react-mic";
+import { ReactMic } from "react-mic";
 
 // Files
 import Header from "../../components/Header";
 import Loading from "../../components/Loading";
-import MicIcon from "../../assets/Icons/MicIcon";
 import "./index.css";
+import MicIcon from "../../assets/Icons/MicIcon";
 
 // Functions
 import { POST } from "../../client/http-functions";
@@ -22,9 +22,7 @@ const Report = (props) => {
   const [isValidSubmission, setIsValidSubmission] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const [audioIsRecording, setAudioIsRecording] = useState(false);
-  const [audioBlobURL, setAudioBlobURL] = useState("");
-  // const [audioFile, setAudioFile] = useState(null);
-  // const [audio, setAudio] = useState(null);
+  const [audioData, setAudioData] = useState("");
 
   const startRecording = () => {
     setAudioIsRecording(true);
@@ -34,17 +32,14 @@ const Report = (props) => {
     setAudioIsRecording(false);
   };
 
-  // const onData = (data) => {
-  //   console.log(data);
-  // };
-
-  // const onStop = (blob) => {
-  //   // let formData = new FormData(blob);
-  //   // let blobWithProp = new Blob([blob["blob"]], blob["options"]);
-  //   // formData.append("file", blobWithProp);
-  //   // setAudioFile(formData);
-  //   setAudioBlobURL(blob);
-  // };
+  const onStop = async (blob) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(blob["blob"]);
+    reader.onloadend = function () {
+      var base64data = reader.result;
+      setAudioData(base64data);
+    };
+  };
 
   const handleSelect = (item) => {
     if (audioIsRecording) {
@@ -71,9 +66,10 @@ const Report = (props) => {
         // success
         async (pos) => {
           const coordinates = pos.coords;
+          const audio = selectedLabels.includes("other") ? audioData : null;
           await POST({
             obstructions: selectedLabels,
-            data: { audio: audioBlobURL },
+            audio: audio,
             location: {
               latitude: coordinates.latitude,
               longitude: coordinates.longitude,
@@ -145,18 +141,17 @@ const Report = (props) => {
           key="Other"
         >
           <p style={{ margin: "0px" }}>Other</p>
-          {/* <ReactMic
+          <ReactMic
             record={audioIsRecording}
+            mimeType="audio/mp3"
             className={
               audioIsRecording ? "report-react-mic-active" : "report-react-mic"
             }
             onStop={onStop}
-            // onData={onData}
-            mimeType="audio/mp3"
             strokeColor="#3e3aff"
             backgroundColor="white"
             visualSetting="frequencyBars"
-          /> */}
+          />
           <div className="report-icon-container">
             <MicIcon
               className={
