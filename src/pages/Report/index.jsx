@@ -50,6 +50,7 @@ const Report = (props) => {
           return e !== item;
         })
       );
+      setIsValidSubmission(false);
     } else {
       if (item === "other") {
         startRecording();
@@ -95,6 +96,7 @@ const Report = (props) => {
     e.preventDefault();
     if (!audioIsRecording) {
       if (isValidSubmission) {
+        console.log("valid submission");
         postLocation();
       } else {
         alert("Incomplete Form");
